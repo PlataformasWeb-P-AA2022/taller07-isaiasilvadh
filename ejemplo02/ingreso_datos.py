@@ -23,3 +23,13 @@ for a in dataclub:
     fila = a.rstrip().split(';')
     c = Club(nombre=fila[0],deporte=fila[1], fundacion=fila[2])
     session.add(c)
+
+for b in dataJugadores:
+    fila = b.rstrip().split(';')
+    aux = session.query(Club).filter_by(nombre = fila[0]).first()
+    j = Jugador(nombre=fila[3], dorsal=fila[2], posicion=fila[1],club=aux)
+    session.add(j)
+
+dataclub.close()
+dataJugadores.close()
+session.commit()    
